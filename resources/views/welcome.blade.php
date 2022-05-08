@@ -23,7 +23,8 @@
             <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
         @endenv
 <main>
-    <h1>Homepage</h1>
+    <header><h2>header</h2></header>
+    <h1>Dashboardpage</h1>
     @yield('content')
 </main>
 </body>
