@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
         <!-- Scripts -->
         @routes
@@ -22,11 +23,14 @@
 {{--        @env ('local')--}}
 {{--            <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>--}}
 {{--        @endenv--}}
-        <header>
-            <h2>header</h2>
+        <header class="d-flex justify-content-center p-2 shadow-sm">
+            <a href="/login" class="btn btn-primary ">Login</a>
+            <a href="/admin/blog/categories" class="btn btn-primary ">Admin categories</a>
         </header>
-        <main>
+        <main class="p-md-5">
             @yield('content')
         </main>
     </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
