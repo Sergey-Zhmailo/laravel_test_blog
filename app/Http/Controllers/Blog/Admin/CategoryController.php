@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Blog\Admin\BaseAdminController;
+use Illuminate\Support\Str;
 
 class CategoryController extends BaseAdminController
 {
@@ -31,7 +33,16 @@ class CategoryController extends BaseAdminController
      */
     public function create()
     {
-        dd(__METHOD__);
+//        dd(__METHOD__);
+        $item = new BlogCategory();
+        $categoryList = BlogCategory::all();
+        
+        return view('blog.admin.categories.edit',
+            [
+                'item'          => $item,
+                'category_list' => $categoryList,
+            ]
+        );
     }
     
     /**
@@ -41,9 +52,27 @@ class CategoryController extends BaseAdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogCategoryCreateRequest $request)
     {
-        //
+        $data = $request->input();
+        
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+        
+        // create object
+//        $item = new BlogCategory($data);
+//        $item->save();
+    
+        $item = (new BlogCategory())->create($data);
+        
+        if ($item) {
+            return redirect()->route('blog.admin.categories.edit', [$item->id])
+                ->with(['success' => 'Save success!']);
+        } else {
+            return back()->withErrors(['msg' => 'Save error'])
+            ->withInput(); // for old{}
+        }
     }
     
     /**
@@ -80,15 +109,15 @@ class CategoryController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param   \Illuminate\Http\Request  $request
+     * @param   \App\Http\Requests\BlogCategoryUpdateRequest  $request
      * @param   int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
 //    public function update(Request $request, $id)
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
-        //        dd(__METHOD__, $request->all(), $id);
+//                dd(__METHOD__, $request->all(), $id);
 //        $rules = [
 //          'title' => 'required|min:5|max:200',
 //          'slug' => 'max:200',
@@ -110,7 +139,7 @@ class CategoryController extends BaseAdminController
 //        dd($validatedData);
         $item = BlogCategory::find($id);
         
-        if (empty($item)) {
+        if (!$item) {
             return back()
                 ->withErrors(['msg' => 'Запись id=[' . $id . '] не найдена'])
                 ->withInput();
@@ -118,19 +147,23 @@ class CategoryController extends BaseAdminController
         
         $data = $request->all();
         
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
         $result = $item
             ->fill($data)
             ->save();
         
-        if ($result) {
-            return redirect()
-                ->route('blog.admin.categories.edit', $item->id)
-                ->with(['success' => 'Успешно сохранено']);
-        } else {
+        if (!$result) {
             return back()
                 ->withErrors(['msg' => 'Error save'])
                 ->withInput();
         }
+        return redirect()
+            ->route('blog.admin.categories.edit', $item->id)
+            ->with(['success' => 'Успешно сохранено']);
+        
     }
     
     /**

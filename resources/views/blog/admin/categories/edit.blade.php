@@ -1,9 +1,18 @@
 @extends('app')
 @section('content')
+    @php
+    /** @var \App\Models\BlogCategory $item */
+    @endphp
+
     <div class="container mx-auto">
         <div class="row">
-            <form method="post" action="{{ route('blog.admin.categories.update', $item->id) }}">
-                @method('PATCH')
+            @if ($item->exists)
+                <form method="post" action="{{ route('blog.admin.categories.update', $item->id) }}">
+                    @method('PATCH')
+            @else
+                <form method="post" action="{{ route('blog.admin.categories.store') }}">
+            @endif
+
                 @csrf
                 <div class="row">
                     @if($errors->any())
@@ -16,6 +25,9 @@
                             </div>
                         </div>
                     @endif
+                    @php
+                        /** @var \Illuminate\Support\ViewErrorBag $errors */
+                    @endphp
                     @if(session('success'))
                             <div class="col col-md-12">
                                 <div class="alert alert-success d-flex align-items-center" role="alert">

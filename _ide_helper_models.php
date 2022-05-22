@@ -12,6 +12,79 @@
 
 namespace App\Models{
 /**
+ * App\Models\BlogCategory
+ *
+ * @property int $id
+ * @property int $parent_id
+ * @property string $slug
+ * @property string $title
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory newQuery()
+ * @method static \Illuminate\Database\Query\Builder|BlogCategory onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|BlogCategory withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|BlogCategory withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class IdeHelperBlogCategory {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BlogPost
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $category_id
+ * @property string $slug
+ * @property string $title
+ * @property string|null $excerpt
+ * @property string $content_raw
+ * @property string $content_html
+ * @property int $is_published
+ * @property string|null $published_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Database\Factories\BlogPostFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost newQuery()
+ * @method static \Illuminate\Database\Query\Builder|BlogPost onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost query()
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereContentHtml($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereContentRaw($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereExcerpt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereIsPublished($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost wherePublishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|BlogPost withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|BlogPost withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class IdeHelperBlogPost {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -26,7 +99,6 @@ namespace App\Models{
  * @property string|null $profile_photo_path
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read string $profile_photo_url
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
@@ -47,7 +119,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent {}
+	class IdeHelperUser {}
 }
 
