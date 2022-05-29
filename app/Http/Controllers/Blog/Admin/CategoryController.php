@@ -9,6 +9,7 @@ use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Blog\Admin\BaseAdminController;
 use Illuminate\Support\Str;
+use App\Services\BlogCategoryService;
 
 class CategoryController extends BaseAdminController
 {
@@ -19,7 +20,8 @@ class CategoryController extends BaseAdminController
      */
     public function index()
     {
-        $paginator = BlogCategory::paginate(5);
+//        $paginator = BlogCategory::paginate(5);
+        $paginator = BlogCategoryService::getAllWithPaginate(5);
         
         return view('blog.admin.categories.index', [
             'items' => $paginator,
@@ -35,7 +37,8 @@ class CategoryController extends BaseAdminController
     {
 //        dd(__METHOD__);
         $item = new BlogCategory();
-        $categoryList = BlogCategory::all();
+//        $categoryList = BlogCategory::all();
+        $categoryList = BlogCategoryService::getForComboBox();
         
         return view('blog.admin.categories.edit',
             [
@@ -96,9 +99,15 @@ class CategoryController extends BaseAdminController
      */
     public function edit($id)
     {
-        $item = BlogCategory::findOrFail($id);
+        $item = BlogCategoryService::getEdit($id);
+        if (empty($item)) {
+            abort(404);
+        }
         
-        $categoryList = BlogCategory::all();
+        $categoryList = BlogCategoryService::getForComboBox();
+//        $item = BlogCategory::findOrFail($id);
+//
+//        $categoryList = BlogCategory::all();
         
         return view('blog.admin.categories.edit', [
             'item'          => $item,
@@ -137,7 +146,8 @@ class CategoryController extends BaseAdminController
         
         
 //        dd($validatedData);
-        $item = BlogCategory::find($id);
+//        $item = BlogCategory::find($id);
+        $item = BlogCategoryService::getEdit($id);
         
         if (!$item) {
             return back()
