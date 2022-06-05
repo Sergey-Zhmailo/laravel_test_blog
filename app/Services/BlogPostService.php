@@ -9,7 +9,7 @@ use App\Models\BlogPost;
  */
 class BlogPostService
 {
-    public static function getAllWithPaginate($perPage = null)
+    public function getAllWithPaginate($perPage = null)
     {
         $columns = [
             'id',
@@ -23,8 +23,20 @@ class BlogPostService
         
         $result = BlogPost::select($columns)
             ->orderBy('id', 'DESC')
+//            ->with(['category', 'user'])
+            ->with([
+                'category' => function($query) {
+                $query->select(['id', 'title']);
+                },
+                'user:id,name',
+])
             ->paginate($perPage);
         
         return $result;
+    }
+    
+    public function getEdit($id)
+    {
+        return BlogPost::find($id);
     }
 }

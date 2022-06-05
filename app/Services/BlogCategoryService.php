@@ -9,12 +9,12 @@ use App\Models\BlogCategory;
  */
 class BlogCategoryService
 {
-    public static function getEdit($id)
+    public function getEdit($id)
     {
         return BlogCategory::find($id);
     }
     
-    public static function getForComboBox()
+    public function getForComboBox()
     {
 //        return BlogCategory::all();
         $fields = implode(',', [
@@ -36,12 +36,14 @@ class BlogCategoryService
         return $result;
     }
     
-    public static function getAllWithPaginate($perPage = null)
+    public function getAllWithPaginate($perPage = null)
     {
-        $fields = ['id', 'title', 'parent_id'];
+//        $fields = ['id', 'title', 'parent_id'];
         
-        $result = BlogCategory::select($fields)->paginate($perPage);
+//        $result = BlogCategory::select($fields)->paginate($perPage);
         
-        return $result;
+//        return $result;
+        return BlogCategory::select(['id', 'title', 'parent_id'])
+            ->paginate($perPage);
     }
 }

@@ -27,6 +27,7 @@
         <header class="d-flex justify-content-center p-2 shadow-sm">
             <a href="/login" class="btn btn-primary ">Login</a>
             <a href="/admin/blog/categories" class="btn btn-primary ">Admin categories</a>
+            <a href="/admin/blog/posts" class="btn btn-primary ">Admin posts</a>
         </header>
         <main class="p-md-5">
             @yield('content')

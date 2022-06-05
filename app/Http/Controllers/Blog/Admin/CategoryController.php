@@ -14,14 +14,32 @@ use App\Services\BlogCategoryService;
 class CategoryController extends BaseAdminController
 {
     /**
+     * @var \App\Services\BlogCategoryService
+     */
+    private BlogCategoryService $categoryService;
+    
+    /**
+     * CategoryController constructor.
+     *
+     * @param   \App\Services\BlogCategoryService  $categoryService
+     */
+    public function __construct(
+        BlogCategoryService $categoryService
+    ) {
+        $this->categoryService = $categoryService;
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+//    public function index(BlogCategoryService $categoryService)
     public function index()
     {
 //        $paginator = BlogCategory::paginate(5);
-        $paginator = BlogCategoryService::getAllWithPaginate(5);
+//        $paginator = BlogCategoryService::getAllWithPaginate(5);
+        $paginator = $this->categoryService->getAllWithPaginate(5);
         
         return view('blog.admin.categories.index', [
             'items' => $paginator,
@@ -38,7 +56,8 @@ class CategoryController extends BaseAdminController
 //        dd(__METHOD__);
         $item = new BlogCategory();
 //        $categoryList = BlogCategory::all();
-        $categoryList = BlogCategoryService::getForComboBox();
+//        $categoryList = BlogCategoryService::getForComboBox();
+        $categoryList = $this->categoryService->getForComboBox();
         
         return view('blog.admin.categories.edit',
             [
@@ -99,12 +118,14 @@ class CategoryController extends BaseAdminController
      */
     public function edit($id)
     {
-        $item = BlogCategoryService::getEdit($id);
+//        $item = BlogCategoryService::getEdit($id);
+        $item = $this->categoryService->getEdit($id);
         if (empty($item)) {
             abort(404);
         }
         
-        $categoryList = BlogCategoryService::getForComboBox();
+//        $categoryList = BlogCategoryService::getForComboBox();
+        $categoryList = $this->categoryService->getForComboBox();
 //        $item = BlogCategory::findOrFail($id);
 //
 //        $categoryList = BlogCategory::all();
@@ -147,7 +168,8 @@ class CategoryController extends BaseAdminController
         
 //        dd($validatedData);
 //        $item = BlogCategory::find($id);
-        $item = BlogCategoryService::getEdit($id);
+//        $item = BlogCategoryService::getEdit($id);
+        $item = $this->categoryService->getEdit($id);
         
         if (!$item) {
             return back()
