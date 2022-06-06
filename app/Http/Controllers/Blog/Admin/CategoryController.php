@@ -78,9 +78,10 @@ class CategoryController extends BaseAdminController
     {
         $data = $request->input();
         
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+        // to observe
+//        if (empty($data['slug'])) {
+//            $data['slug'] = Str::slug($data['title']);
+//        }
         
         // create object
 //        $item = new BlogCategory($data);
