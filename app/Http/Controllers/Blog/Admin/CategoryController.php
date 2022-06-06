@@ -121,6 +121,20 @@ class CategoryController extends BaseAdminController
     {
 //        $item = BlogCategoryService::getEdit($id);
         $item = $this->categoryService->getEdit($id);
+        
+        $v['title_before'] = $item->title; // run accessor
+        $item->title = 'ASDasd 123';
+        
+        $v['title_after'] = $item->title;
+        $v['getAttribute'] = $item->getAttribute('title');
+        $v['attributesToArray'] = $item->attributesToArray();
+//        $v['attributes'] = $item->attributes['title'];
+        $v['getAttributeValue'] = $item->getAttributeValue('title');
+        $v['getMutatedAttributes'] = $item->getMutatedAttributes();
+        $v['hasGwtMutator for title'] = $item->hasGetMutator('title');
+        $v['toArray'] = $item->toArray();
+        dd($v, $item);
+        
         if (empty($item)) {
             abort(404);
         }

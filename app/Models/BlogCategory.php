@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -49,5 +50,31 @@ class BlogCategory extends Model
     public function isRoot()
     {
         return $this->id === BlogCategory::ROOT;
+    }
+    
+    /**
+     * accessor
+     * @param $valueFromObject
+     *
+     * @return array|false|string|string[]|null
+     */
+    public function getTitleAttribute($valueFromObject) {
+        return mb_strtoupper($valueFromObject);
+    }
+    
+    // error make
+//    protected function title(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn ($value) => mb_strtoupper($value),
+//        );
+//    }
+    
+    /**
+     * mutator
+     * @param $incomingValue
+     */
+    public function setTitleAttribute($incomingValue) {
+        $this->attributes['title'] = mb_strtolower($incomingValue);
     }
 }
