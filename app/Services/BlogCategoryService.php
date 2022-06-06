@@ -44,6 +44,7 @@ class BlogCategoryService
         
 //        return $result;
         return BlogCategory::select(['id', 'title', 'parent_id'])
+            ->with(['parentCategory:id,title']) //relation
             ->paginate($perPage);
     }
 }

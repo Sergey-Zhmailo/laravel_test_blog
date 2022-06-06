@@ -25,7 +25,13 @@
                                 <td>{{$item->id}}</td>
                                 <td><a href="{{ route('blog.admin.categories.edit', $item->id) }}">{{ $item->title }}</a></td>
                                 <td class="border border-slate-300 px-2 py-2"
-                                    @if(in_array($item->parent_id, [1, 0])) style="color:green;" @endif>{{ $item->parent_id }}</td>
+                                    @if(in_array($item->parent_id, [1, 0])) style="color:green;" @endif>
+{{--                                    {{ $item->parentCategory->title ?? '?' }}--}}
+{{--                                    {{ optional($item->parentCategory)->title }}--}}
+{{--                                        {{ $item->parent_title }} --}}{{-- accesser --}}
+                                        {{ $item->parentTitle }}
+
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
