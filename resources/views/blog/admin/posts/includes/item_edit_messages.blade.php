@@ -2,7 +2,12 @@
     <div class="col col-md-12">
         <div class="alert alert-danger d-flex align-items-center" role="alert">
             <div>
-                {{ $errors->first() }}
+{{--                {{ $errors->first() }}--}}
+                <ul>
+                    @foreach($errors->all() as $errorText)
+                        <li>{{ $errorText }}</li>
+                    @endforeach
+                </ul>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
