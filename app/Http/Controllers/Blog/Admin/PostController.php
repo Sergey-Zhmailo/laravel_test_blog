@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Models\BlogPost;
+use App\Observers\BlogPostObserver;
 use App\Services\BlogCategoryService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -116,13 +118,14 @@ class PostController extends BaseAdminController
         
         $data = $request->all();
         
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+        // to observer
+//        if (empty($data['slug'])) {
+//            $data['slug'] = Str::slug($data['title']);
+//        }
     
-        if (empty($item->published_at) && $data['is_published']) {
-            $data['published_at'] = Carbon::now();
-        }
+//        if (empty($item->published_at) && $data['is_published']) {
+//            $data['published_at'] = Carbon::now();
+//        }
         
         $result = $item->update($data);
         
