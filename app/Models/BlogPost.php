@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @mixin IdeHelperBlogPost
- *
  * @package App/Models
- *
  * @property \App\Models\BlogCategory $category
  * @property \App\Models\User $user
  * @property string $title
@@ -20,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $excerpt
  * @property string $published_at
  * @property boolean $is_published
+ * @mixin IdeHelperBlogPost
  */
 class BlogPost extends Model
 {

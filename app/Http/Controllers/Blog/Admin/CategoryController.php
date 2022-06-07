@@ -133,7 +133,7 @@ class CategoryController extends BaseAdminController
         $v['getMutatedAttributes'] = $item->getMutatedAttributes();
         $v['hasGwtMutator for title'] = $item->hasGetMutator('title');
         $v['toArray'] = $item->toArray();
-        dd($v, $item);
+//        dd($v, $item);
         
         if (empty($item)) {
             abort(404);

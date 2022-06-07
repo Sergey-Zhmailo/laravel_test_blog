@@ -99,6 +99,18 @@ class BlogPostObserver
     {
         //
     }
+    
+    /**
+     * Handle the BlogPost "before delete" event.
+     *
+     * @param  \App\Models\BlogPost  $blogPost
+     * @return void
+     */
+    public function deleting(BlogPost $blogPost)
+    {
+        // return false -действие не произойдет
+//        return false;
+    }
 
     /**
      * Handle the BlogPost "restored" event.

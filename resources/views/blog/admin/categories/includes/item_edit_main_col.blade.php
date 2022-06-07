@@ -20,8 +20,7 @@
             </select>
 
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" rows="3">
-                {{ old('description', $item->description) }}</textarea>
+            <textarea name="description" id="description" class="form-control" rows="3">{{ old('description', $item->description) }}</textarea>
         </div>
     </div>
 </div>

@@ -9,6 +9,7 @@
                             <a class="btn btn-primary" href="{{ route('blog.admin.posts.create') }}">Add POst</a>
                         </li>
                     </ul>
+                    @include('blog.admin.posts.includes.item_edit_messages')
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-hover">

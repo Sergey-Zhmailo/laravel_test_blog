@@ -14,6 +14,9 @@ namespace App\Models{
 /**
  * App\Models\BlogCategory
  *
+ * @package App\Models
+ * @property-read \App\Models\BlogCategory $parentCategory
+ * @property-read string $parentTitle
  * @property int $id
  * @property int $parent_id
  * @property string $slug
@@ -22,6 +25,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read mixed $parent_title
  * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory newQuery()
  * @method static \Illuminate\Database\Query\Builder|BlogCategory onlyTrashed()
@@ -36,7 +40,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|BlogCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|BlogCategory withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BlogCategory withoutTrashed()
- * @mixin \Eloquent
  */
 	class IdeHelperBlogCategory {}
 }
@@ -45,16 +48,19 @@ namespace App\Models{
 /**
  * App\Models\BlogPost
  *
+ * @package App/Models
+ * @property \App\Models\BlogCategory $category
+ * @property \App\Models\User $user
+ * @property string $title
+ * @property string $slug
+ * @property string $content_html
+ * @property string $content_raw
+ * @property string $excerpt
+ * @property string $published_at
+ * @property boolean $is_published
  * @property int $id
  * @property int $user_id
  * @property int $category_id
- * @property string $slug
- * @property string $title
- * @property string|null $excerpt
- * @property string $content_raw
- * @property string $content_html
- * @property int $is_published
- * @property string|null $published_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -78,7 +84,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|BlogPost withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BlogPost withoutTrashed()
- * @mixin \Eloquent
  */
 	class IdeHelperBlogPost {}
 }
@@ -119,7 +124,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
  */
 	class IdeHelperUser {}
 }

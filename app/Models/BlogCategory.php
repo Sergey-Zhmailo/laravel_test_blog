@@ -8,12 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @mixin IdeHelperBlogCategory
- *
  * @package App\Models
- *
  * @property-read \App\Models\BlogCategory $parentCategory
  * @property-read string $parentTitle
+ * @mixin IdeHelperBlogCategory
  */
 class BlogCategory extends Model
 {
@@ -58,23 +56,24 @@ class BlogCategory extends Model
      *
      * @return array|false|string|string[]|null
      */
-    public function getTitleAttribute($valueFromObject) {
-        return mb_strtoupper($valueFromObject);
-    }
-    
-    // error make
-//    protected function title(): Attribute
-//    {
-//        return Attribute::make(
-//            get: fn ($value) => mb_strtoupper($value),
-//        );
+//    public function getTitleAttribute($valueFromObject) {
+//        return mb_strtoupper($valueFromObject);
 //    }
+    
+
+    protected function title(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => mb_strtoupper($value),
+            set: fn ($value) => strtolower($value),
+        );
+    }
     
     /**
      * mutator
      * @param $incomingValue
      */
-    public function setTitleAttribute($incomingValue) {
-        $this->attributes['title'] = mb_strtolower($incomingValue);
-    }
+//    public function setTitleAttribute($incomingValue) {
+//        $this->attributes['title'] = mb_strtolower($incomingValue);
+//    }
 }
