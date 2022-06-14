@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Blog\Admin\CategoryController;
 use \App\Http\Controllers\Blog\Admin\PostController;
+use App\Http\Controllers\DiggingDeeperController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})
+    ->middleware(['auth'])
+    ->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 //Route::group(
 //    ['prefix' => 'blog'],
@@ -35,13 +38,25 @@ require __DIR__.'/auth.php';
 
 // Blog admin
 $groupData = [
-    'prefix' => 'admin/blog'
+    'prefix' => 'admin/blog',
 ];
 
 Route::group($groupData, function () {
     // Blog Category
     $methods = ['index', 'edit', 'update', 'create', 'store'];
-    Route::resource('categories', CategoryController::class)->only($methods)->names('blog.admin.categories');
+    Route::resource('categories', CategoryController::class)
+        ->only($methods)
+        ->names('blog.admin.categories');
     // Blog Post
-    Route::resource('posts', PostController::class)->except(['show'])->names('blog.admin.posts');
+    Route::resource('posts', PostController::class)
+        ->except(['show'])
+        ->names('blog.admin.posts');
+});
+
+$groupCollectionData = [
+    'prefix' => 'digging_deeper',
+];
+Route::group($groupCollectionData, function () {
+    Route::get('collections', DiggingDeeperController::collections()) // 'DiggingDeeperContoller@collections' controller@method
+        ->name('digging_deeper.collections');
 });
